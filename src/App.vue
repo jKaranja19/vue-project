@@ -10,12 +10,19 @@ function increment() {
   // update component state
   count.value++
 }
+//the toggle feature for the button, mwehehe
+const awesome = ref(true)
+// function toggle(){
+
+// }
 
 </script>
 
 <template>
-  <!-- <h1>{{ message }}</h1>
-  <p>Count is: {{ counter.count }}</p> -->
+
+  <button @click="awesome = !awesome">Toggle</button>
+  <h1 v-if="awesome" >Vue is awesome!</h1>
+  <h1 v-else>Oh brother🥴</h1>
 
   <h2 :class="tileColour"> I am a certain color</h2>
   <!-- button  -->
