@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { watch, onMounted, computed, reactive, ref } from 'vue'
 
 // const counter = reactive({ count: 0 })
 // const message = ref('Hello World!')
@@ -16,29 +16,49 @@ import { computed, reactive, ref } from 'vue'
 
 // }
 //calling the list view with mutating methods, first give them unique ids
-let id=0
-const newTodo = ref('')
-const todos = ref([
-  {id: id++, text: 'Learn Html', done:true},
-  {id: id++, text:'Learn Javascript'},
-  {id: id++, text:'Learn Vue'}
-])
+// let id=0
+// const newTodo = ref('')
+// const todos = ref([
+//   {id: id++, text: 'Learn Html', done:true},
+//   {id: id++, text:'Learn Javascript'},
+//   {id: id++, text:'Learn Vue'}
+// ])
 
-function addTodo() {
-  todos.value.push({ id: id++, text: newTodo.value })
-  newTodo.value = ''
-}
+// function addTodo() {
+//   todos.value.push({ id: id++, text: newTodo.value })
+//   newTodo.value = ''
+// }
 
-function removeTodo(todo) {
-  todos.value = todos.value.filter((t) => t !== todo)
-}
+// function removeTodo(todo) {
+//   todos.value = todos.value.filter((t) => t !== todo)
+// }
 
-const hideCompleted = ref(false)
-const filteredTodos = computed(() => {
-  return hideCompleted.value
-    ? todos.value.filter((t) => !t.done)
-    : todos.value
-})
+// const hideCompleted = ref(false)
+// const filteredTodos = computed(() => {
+//   return hideCompleted.value
+//     ? todos.value.filter((t) => !t.done)
+//     : todos.value
+// })
+// working with the mounted elemt, only when it is defined we can see the word defined in it.
+// const pElement = ref(null)
+// onMounted(()=>{
+//   pElement.value.textContent = 'mounted!'
+// })
+
+//working with watch
+// const todoId = ref(1)
+// const todoData = ref(null)
+// async function fetchData() {
+//   todoData.value = null
+//   const res = await fetch(
+//     `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+//   )
+//   todoData.value = await res.json()
+// }
+
+// fetchData()
+
+// watch(todoId, fetchData)
 </script>
 
 <template>
@@ -56,21 +76,31 @@ const filteredTodos = computed(() => {
    <!-- <input v-model="text">
    <p>{{ text }}</p> -->
 
-   <form @submit.prevent="addTodo">
+   <!-- <form @submit.prevent="addTodo"> -->
     <!-- <input type="checkbox" v-model="todo.done"> -->
-    <input v-model="newTodo" required placeholder="new todo">
-    <button>Add Todo</button>
-  </form>
-  <ul>
-    <li v-for="todo in filteredTodos" :key="todo.id">
-      <input type="checkbox" v-model="todo.done">
-      <span :class="{ done: todo.done }">{{ todo.text }}</span>
-      <button @click="removeTodo(todo)">X</button>
-    </li>
+    <!-- <input v-model="newTodo" required placeholder="new todo"> -->
+    <!-- <button>Add Todo</button> -->
+  <!-- </form> -->
+  <!-- <ul> -->
+    <!-- <li v-for="todo in filteredTodos" :key="todo.id"> -->
+      <!-- <input type="checkbox" v-model="todo.done"> -->
+      <!-- <span :class="{ done: todo.done }">{{ todo.text }}</span> -->
+      <!-- <button @click="removeTodo(todo)">X</button> -->
+    <!-- </li>
   </ul>
   <button @click="hideCompleted = !hideCompleted">
     {{ hideCompleted ? 'Show all' : 'Hide completed' }}
-  </button>
+  </button> -->
+
+  <!-- working with the mounted function -->
+   <!-- <p ref="pElement">Hey there</p> -->
+
+   <!-- here we are looking at how watch can check the data -->
+  <!-- <p>Todo id: {{ todoId }}</p>
+  <button @click="todoId++" :disabled="!todoData">Fetch next todo</button>
+  <p v-if="!todoData">Loading...</p>
+  <pre v-else>{{ todoData }}</pre> -->
+  
 </template>
 
 <style>
