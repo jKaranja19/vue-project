@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 // const counter = reactive({ count: 0 })
 // const message = ref('Hello World!')
@@ -18,11 +18,11 @@ import { reactive, ref } from 'vue'
 //calling the list view with mutating methods, first give them unique ids
 let id=0
 const newTodo = ref('')
-const todos = ref()[
-  {id: id++, text: 'Learn Html'},
+const todos = ref([
+  {id: id++, text: 'Learn Html', done:true},
   {id: id++, text:'Learn Javascript'},
   {id: id++, text:'Learn Vue'}
-]
+])
 
 function addTodo() {
   todos.value.push({ id: id++, text: newTodo.value })
@@ -32,6 +32,13 @@ function addTodo() {
 function removeTodo(todo) {
   todos.value = todos.value.filter((t) => t !== todo)
 }
+
+const hideCompleted = ref(false)
+const filteredTodos = computed(() => {
+  return hideCompleted.value
+    ? todos.value.filter((t) => !t.done)
+    : todos.value
+})
 </script>
 
 <template>
@@ -50,20 +57,28 @@ function removeTodo(todo) {
    <p>{{ text }}</p> -->
 
    <form @submit.prevent="addTodo">
+    <!-- <input type="checkbox" v-model="todo.done"> -->
     <input v-model="newTodo" required placeholder="new todo">
     <button>Add Todo</button>
   </form>
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      {{ todo.text }}
+    <li v-for="todo in filteredTodos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{ done: todo.done }">{{ todo.text }}</span>
       <button @click="removeTodo(todo)">X</button>
     </li>
   </ul>
+  <button @click="hideCompleted = !hideCompleted">
+    {{ hideCompleted ? 'Show all' : 'Hide completed' }}
+  </button>
 </template>
 
 <style>
 .titlecolor{
   color: red;
   font-weight: 10;
+}
+.done {
+  text-decoration: line-through;
 }
 </style>
