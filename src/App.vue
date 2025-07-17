@@ -1,5 +1,6 @@
 <script setup>
 import { watch, onMounted, computed, reactive, ref } from 'vue'
+import ChildComp from './ChildComponent.vue'
 
 // const counter = reactive({ count: 0 })
 // const message = ref('Hello World!')
@@ -59,6 +60,11 @@ import { watch, onMounted, computed, reactive, ref } from 'vue'
 // fetchData()
 
 // watch(todoId, fetchData)
+
+//sedning data to the child component:
+const greeting = ref('Hello from parent')
+const childMsg = ref('No child msg yet')
+const msg = ref('from parent')
 </script>
 
 <template>
@@ -100,7 +106,13 @@ import { watch, onMounted, computed, reactive, ref } from 'vue'
   <button @click="todoId++" :disabled="!todoData">Fetch next todo</button>
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{ todoData }}</pre> -->
-  
+  <!-- <ChildComp></ChildComp> -->
+   <!-- passing message from the parent -->
+    <ChildComp :msg="greeting"/>
+    <ChildComp @response="(msg) => childMsg = msg" />
+    <p>{{ childMsg }}</p>
+    <ChildComp>This is a slot section</ChildComp>
+    <ChildComp>Message: {{ msg }}</ChildComp>
 </template>
 
 <style>
