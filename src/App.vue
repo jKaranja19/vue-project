@@ -1,7 +1,7 @@
 <script setup>
 import { watch, onMounted, computed, reactive, ref } from 'vue'
 import ChildComp from './ChildComponent.vue'
-import BlogPost from './components/BlogPost.vue'
+import BlogPost from './components/BlogList.vue'
 
 // const counter = reactive({ count: 0 })
 // const message = ref('Hello World!')
@@ -68,11 +68,11 @@ import BlogPost from './components/BlogPost.vue'
 // const msg = ref('from parent')
 
 //working with props
-const posts = ref([
-  { id: 1, title: 'My journey with Vue' },
-  { id: 2, title: 'Blogging with Vue' },
-  { id: 3, title: 'Why Vue is so fun' }
-])
+// const posts = ref([
+//   { id: 1, title: 'My journey with Vue' },
+//   { id: 2, title: 'Blogging with Vue' },
+//   { id: 3, title: 'Why Vue is so fun' }
+// ])
 </script>
 
 <template>
@@ -121,11 +121,15 @@ const posts = ref([
     <p>{{ childMsg }}</p>
     <ChildComp>This is a slot section</ChildComp>
     <ChildComp>Message: {{ msg }}</ChildComp> -->
-    <BlogPost
+    <!-- <BlogPost
   	v-for="post in posts"
 	  :key="post.id"
   	:title="post.title"
-	></BlogPost>
+	></BlogPost> -->
+  <main>
+    <h1>📝 Blog Viewer</h1>
+    <BlogList />
+  </main>
     
 </template>
 
