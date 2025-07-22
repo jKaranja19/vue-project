@@ -1,6 +1,7 @@
 <script setup>
 import { watch, onMounted, computed, reactive, ref } from 'vue'
 import ChildComp from './ChildComponent.vue'
+import BlogPost from './components/BlogPost.vue'
 
 // const counter = reactive({ count: 0 })
 // const message = ref('Hello World!')
@@ -62,9 +63,16 @@ import ChildComp from './ChildComponent.vue'
 // watch(todoId, fetchData)
 
 //sedning data to the child component:
-const greeting = ref('Hello from parent')
-const childMsg = ref('No child msg yet')
-const msg = ref('from parent')
+// const greeting = ref('Hello from parent')
+// const childMsg = ref('No child msg yet')
+// const msg = ref('from parent')
+
+//working with props
+const posts = ref([
+  { id: 1, title: 'My journey with Vue' },
+  { id: 2, title: 'Blogging with Vue' },
+  { id: 3, title: 'Why Vue is so fun' }
+])
 </script>
 
 <template>
@@ -108,11 +116,17 @@ const msg = ref('from parent')
   <pre v-else>{{ todoData }}</pre> -->
   <!-- <ChildComp></ChildComp> -->
    <!-- passing message from the parent -->
-    <ChildComp :msg="greeting"/>
+    <!-- <ChildComp :msg="greeting"/>
     <ChildComp @response="(msg) => childMsg = msg" />
     <p>{{ childMsg }}</p>
     <ChildComp>This is a slot section</ChildComp>
-    <ChildComp>Message: {{ msg }}</ChildComp>
+    <ChildComp>Message: {{ msg }}</ChildComp> -->
+    <BlogPost
+  	v-for="post in posts"
+	  :key="post.id"
+  	:title="post.title"
+	></BlogPost>
+    
 </template>
 
 <style>
