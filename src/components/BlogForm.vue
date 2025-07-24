@@ -8,23 +8,29 @@ const paragraph = ref('')
 const author = ref('')
 
 function handleSubmit() {
-  if (!title.value || !paragraph.value) return alert('Please fill out the blog')
+  if (!title.value || !paragraph.value) {
+    alert('Please fill out the blog')
+    return
+  }
   emit('submitBlog', {
     title: title.value,
     content: content.value,
     paragraph: paragraph.value,
-    author: author.value
+    author: author.value || 'Anonymous'
   })
-  title.value = content.value = paragraph.value = author.value = ''
+  title.value = ''
+  content.value = ''
+  paragraph.value = ''
+  author.value = ''
 }
 </script>
 
 <template>
   <form @submit.prevent="handleSubmit" class="blog-form">
     <h3>Add Your Blog</h3>
-    <input v-model="title" placeholder="Title" />
-    <input v-model="content" placeholder="Content Type" />
-    <textarea v-model="paragraph" placeholder="Blog Text..."/>
+    <input v-model="title" placeholder="Title" required />
+    <input v-model="content" placeholder="Which context is it?" />
+    <textarea v-model="paragraph" placeholder="Add your text right here..." required />
     <input v-model="author" placeholder="Author" />
     <button type="submit">Post Blog</button>
   </form>
@@ -38,6 +44,7 @@ function handleSubmit() {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 2rem;
 }
 input, textarea {
   padding: 8px;
