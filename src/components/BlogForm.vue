@@ -54,7 +54,7 @@ input, textarea {
 button {
   align-self: flex-start;
   padding: 8px 16px;
-  background: #28a745;
+  background: #b860b8;
   color: white;
   border: none;
   border-radius: 4px;

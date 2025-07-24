@@ -32,12 +32,12 @@ const emit = defineEmits(['readBlog'])
   cursor: pointer;
 }
 .blog-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 .read-btn {
   margin-top: 10px;
   padding: 6px 12px;
-  background-color: #0077cc;
+  background-color: #b860b8;
   color: white;
   border: none;
   border-radius: 5px;
