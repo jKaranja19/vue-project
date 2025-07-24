@@ -1,3 +1,4 @@
+<!-- This displays the blogs on the desktop view blurring out the rest of the content -->
 <template>
   <div class="modal-overlay" @click.self="$emit('close')">
     <div class="modal-content">

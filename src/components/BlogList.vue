@@ -1,3 +1,4 @@
+<!-- The parent that holds all children components, but a child to the app.vue -->
 <script setup>
 import BlogPost from './BlogPost.vue'
 import BlogModal from './BlogModal.vue'
