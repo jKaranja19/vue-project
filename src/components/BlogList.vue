@@ -53,9 +53,31 @@ function closeModal() {
 }
 
 function addBlog(blog) {
-  blogPosts.value.push(blog)
+  if (blog.index !== undefined) {
+    // Editing an existing blog
+    blogPosts.value[blog.index] = {
+      title: blog.title,
+      content: blog.content,
+      paragraph: blog.paragraph,
+      author: blog.author
+    }
+  } else {
+    blogPosts.value.push(blog)
+  }
   formOpen.value = false
 }
+
+function deleteBlog(index) {
+  blogPosts.value.splice(index, 1)
+}
+
+function editBlog(index) {
+  const post = blogPosts.value[index]
+  selectedBlog.value = { ...post }
+  selectedBlog.value.index = index
+  formOpen.value = true
+}
+
 </script>
 
 <template>
@@ -67,6 +89,8 @@ function addBlog(blog) {
         :index="index"
         v-bind="post"
         @readBlog="openBlog"
+        @editBlog="editBlog"
+        @deleteBlog="deleteBlog"
       />
     </div>
 
@@ -74,7 +98,11 @@ function addBlog(blog) {
       {{ formOpen ? 'Cancel' : 'Add Your Own Blog' }}
     </button>
 
-    <BlogForm v-if="formOpen" @submitBlog="addBlog" />
+    <BlogForm
+      v-if="formOpen"
+      :blog="selectedBlog"
+      @submitBlog="addBlog"
+    />
 
     <BlogModal v-if="showModal" :blog="selectedBlog" @close="closeModal" />
   </div>

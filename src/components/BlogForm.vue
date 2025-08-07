@@ -1,11 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+const props = defineProps({
+  blog: Object
+})
 const emit = defineEmits(['submitBlog'])
 
 const title = ref('')
 const content = ref('')
 const paragraph = ref('')
 const author = ref('')
+const index = ref(undefined)
+
+watch(() => props.blog, (newBlog) => {
+  if (newBlog) {
+    title.value = newBlog.title
+    content.value = newBlog.content
+    paragraph.value = newBlog.paragraph
+    author.value = newBlog.author
+    index.value = newBlog.index // updating
+  }
+}, { immediate: true })
 
 function handleSubmit() {
   if (!title.value || !paragraph.value) {
@@ -16,12 +30,15 @@ function handleSubmit() {
     title: title.value,
     content: content.value,
     paragraph: paragraph.value,
-    author: author.value || 'Anonymous'
+    author: author.value || 'Anonymous',
+    index: index.value
   })
+  // Clear form after submission
   title.value = ''
   content.value = ''
   paragraph.value = ''
   author.value = ''
+  index.value = undefined
 }
 </script>
 

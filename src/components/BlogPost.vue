@@ -18,7 +18,13 @@ const emit = defineEmits(['readBlog'])
     <h4><em>{{ content }}</em></h4>
     <p>{{ paragraph.slice(0, 100) }}...</p>
     <p><strong>{{ author }}</strong></p>
-    <button class="read-btn">Read Blog</button>
+    <div class="button-row">
+      <button class="read-btn" @click.stop="emit('readBlog', index)">Read Blog</button>
+      <div class="actions">
+        <button class="edit-btn" @click.stop="emit('editBlog', index)">Edit</button>
+        <button class="delete-btn" @click.stop="emit('deleteBlog', index)">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,12 +40,40 @@ const emit = defineEmits(['readBlog'])
 .blog-card:hover {
   transform: translateY(-4px);
 }
-.read-btn {
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
+}
+
+.read-btn {
   padding: 6px 12px;
   background-color: #b860b8;
   color: white;
   border: none;
   border-radius: 5px;
 }
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background-color: #fdd835;
+  color: black;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background-color: #e53935;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+
 </style>
