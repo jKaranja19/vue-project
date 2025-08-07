@@ -37,7 +37,7 @@ const blogPosts = ref([
     author: 'Again, Wangui',
   }
 ])
-
+// is false and null to avoi
 const showModal = ref(false)
 const selectedBlog = ref(null)
 const formOpen = ref(false)
@@ -54,7 +54,7 @@ function closeModal() {
 
 function addBlog(blog) {
   if (blog.index !== undefined) {
-    // Editing an existing blog
+    // Editing an existing blog using that index specifically
     blogPosts.value[blog.index] = {
       title: blog.title,
       content: blog.content,
@@ -62,15 +62,18 @@ function addBlog(blog) {
       author: blog.author
     }
   } else {
+    // this is when we want to create a new blog though if there is no index defined here
     blogPosts.value.push(blog)
   }
   formOpen.value = false
 }
-
+// splice, is used in vue to modify the contents of an array
+//  by removing or adding elements
 function deleteBlog(index) {
   blogPosts.value.splice(index, 1)
 }
-
+//to edit each post based on the index, have the index value, and take the deatils initially there
+//add the details to the form then after edit, post the new details on the same index
 function editBlog(index) {
   const post = blogPosts.value[index]
   selectedBlog.value = { ...post }
@@ -79,7 +82,7 @@ function editBlog(index) {
 }
 
 </script>
-
+<!-- the props are passed from parent to child here -->
 <template>
   <div class="container">
     <div class="grid-container">

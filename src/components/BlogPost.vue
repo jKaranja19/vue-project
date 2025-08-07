@@ -1,6 +1,6 @@
 <script setup>
 // this should be the child component
-// it receives the properties from the parent and displays a single blog and the parent displays all the posts.
+// it receives the properties (props) from the parent and displays a single blog and the parent displays all the posts.
 // it's a reusable view on other parts
 const props = defineProps({
   title: String,
@@ -61,7 +61,7 @@ const emit = defineEmits(['readBlog'])
 }
 
 .edit-btn {
-  background-color: #fdd835;
+  background-color: #ffd102;
   color: black;
   padding: 6px 12px;
   border: none;
@@ -69,7 +69,7 @@ const emit = defineEmits(['readBlog'])
 }
 
 .delete-btn {
-  background-color: #e53935;
+  background-color: #ff0400;
   color: white;
   padding: 6px 12px;
   border: none;
