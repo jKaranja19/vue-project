@@ -44,7 +44,7 @@ function handleSubmit() {
 
 <template>
   <form @submit.prevent="handleSubmit" class="blog-form">
-    <h3>Add Your Blog</h3>
+    <h3>{{ index !== undefined ? 'Edit Blog' : 'Add Your Blog' }}</h3>
     <input v-model="title" placeholder="Title" required />
     <input v-model="content" placeholder="Which context is it?" />
     <textarea v-model="paragraph" placeholder="Add your text right here..." required />
