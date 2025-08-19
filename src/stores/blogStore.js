@@ -35,7 +35,6 @@ export const useBlogStore = defineStore('blog', {
         paragraph: 'Two orphans, older sister acts as guardian, they fight, kid prays to get a friend, lol, queue stitch, the movie is literally on the aspect of child being friends with wierd alien, and more aliens are still around and they help ythem find their purpose...',
         author: 'Again, Wangui',
       }
-      // ... other initial posts
     ]
   }),
   actions: {

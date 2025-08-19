@@ -121,14 +121,15 @@ function editBlog(index) {
 
 <style scoped>
 .container {
-  max-width: 960px;
+  max-width: 800px; /* Narrower container for better column reading */
   margin: 0 auto;
-  text-align: center;
+  padding: 0 20px; /* Add some padding on sides */
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+/* Checking the flex direction to be a column  */
+.posts-column {
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
