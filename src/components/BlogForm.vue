@@ -11,6 +11,7 @@ const paragraph = ref('')
 const author = ref('')
 const index = ref(undefined)
 
+// Understand 
 watch(() => props.blog, (newBlog) => {
   if (newBlog) {
     title.value = newBlog.title
