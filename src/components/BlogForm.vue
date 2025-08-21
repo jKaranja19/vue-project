@@ -12,6 +12,9 @@ const author = ref('')
 const index = ref(undefined)
 
 // Understand 
+//when a parent passes the prop to the child, either creating a new blog or editing it
+//when it changes, newBlog runs, anytime i want to edit or add a new blog
+//so if new blog has stuff, it updates the ref. 
 watch(() => props.blog, (newBlog) => {
   if (newBlog) {
     title.value = newBlog.title
