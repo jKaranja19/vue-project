@@ -1,8 +1,79 @@
 <script setup>
-defineProps:{['title', 'content', 'paragraph']}
+// this should be the child component
+// it receives the properties (props) from the parent and displays a single blog and the parent displays all the posts.
+// it's a reusable view on other parts
+const props = defineProps({
+  title: String,
+  content: String,
+  paragraph: String,
+  author: String,
+  index: Number,
+})
+const emit = defineEmits(['readBlog'])
 </script>
+
 <template>
+  <div class="blog-card" @click="emit('readBlog', index)">
     <h2>{{ title }}</h2>
-    <h3>{{ content }}</h3>
-    <h4>{{ paragraph }}</h4>
+    <h4><em>{{ content }}</em></h4>
+    <p>{{ paragraph.slice(0, 100) }}...</p>
+    <p><strong>{{ author }}</strong></p>
+    <div class="button-row">
+      <button class="read-btn" @click.stop="emit('readBlog', index)">Read Blog</button>
+      <div class="actions">
+        <button class="edit-btn" @click.stop="emit('editBlog', index)">Edit</button>
+        <button class="delete-btn" @click.stop="emit('deleteBlog', index)">Delete</button>
+      </div>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.blog-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.blog-card:hover {
+  transform: translateY(-4px);
+}
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.read-btn {
+  padding: 6px 12px;
+  background-color: #b860b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background-color: #ffd102;
+  color: black;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background-color: #ff0400;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+
+</style>
